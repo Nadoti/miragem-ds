@@ -18,7 +18,7 @@ var space = {
 };
 
 // src/line-heights.ts
-var lineHeight = {
+var lineHeights = {
   base: "120%"
 };
 
@@ -28,24 +28,35 @@ var fonts = {
 };
 
 // src/font-weight.ts
-var fontWeight = {
+var fontWeights = {
   regular: "400",
   semiBold: "600",
   bold: "700"
 };
 
 // src/font-size.ts
-var fontSize = {
+var fontSizes = {
   sm: "0.812rem",
   md: "1rem",
   lg: "1.25rem",
   xl: "1.562rem"
 };
+
+// src/radii.ts
+var radii = {
+  px: "1px",
+  xs: "4px",
+  sm: "6px",
+  md: "8px",
+  lg: "16px",
+  full: "99999px"
+};
 export {
   colors,
-  fontSize,
-  fontWeight,
+  fontSizes,
+  fontWeights,
   fonts,
-  lineHeight,
+  lineHeights,
+  radii,
   space
 };

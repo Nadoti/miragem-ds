@@ -15,7 +15,7 @@ declare const space: {
     6: string;
 };
 
-declare const lineHeight: {
+declare const lineHeights: {
     base: string;
 };
 
@@ -23,17 +23,26 @@ declare const fonts: {
     default: string;
 };
 
-declare const fontWeight: {
+declare const fontWeights: {
     regular: string;
     semiBold: string;
     bold: string;
 };
 
-declare const fontSize: {
+declare const fontSizes: {
     sm: string;
     md: string;
     lg: string;
     xl: string;
 };
 
-export { colors, fontSize, fontWeight, fonts, lineHeight, space };
+declare const radii: {
+    px: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    full: string;
+};
+
+export { colors, fontSizes, fontWeights, fonts, lineHeights, radii, space };

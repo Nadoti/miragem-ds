@@ -1,3 +1,4 @@
+"use strict";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -16,20 +17,25 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/index.ts
+// src/index.tsx
 var index_exports = {};
 __export(index_exports, {
-  colors: () => colors,
-  fontSizes: () => fontSizes,
-  fontWeights: () => fontWeights,
-  fonts: () => fonts,
-  lineHeights: () => lineHeights,
-  radii: () => radii,
-  space: () => space
+  Input: () => Input,
+  Select1: () => Select1
 });
 module.exports = __toCommonJS(index_exports);
 
-// src/colors.ts
+// src/components/Select.tsx
+var import_react = require("@stitches/react");
+var import_jsx_runtime = require("react/jsx-runtime");
+var Select = (0, import_react.styled)("select", {
+  appearance: "none"
+});
+function Select1() {
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Select, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", { value: "", children: "Teste090000" }) });
+}
+
+// ../tokens/dist/index.mjs
 var colors = {
   black: "#000000",
   white: "#FFFFFF",
@@ -40,40 +46,28 @@ var colors = {
   blue600: "#004D61",
   red500: "#FF5031"
 };
-
-// src/space.ts
 var space = {
   2: "0.5rem",
   4: "1rem",
   6: "1.5rem"
 };
-
-// src/line-heights.ts
 var lineHeights = {
   base: "120%"
 };
-
-// src/fonts.ts
 var fonts = {
   default: "Inter, sans-serif"
 };
-
-// src/font-weight.ts
 var fontWeights = {
   regular: "400",
   semiBold: "600",
   bold: "700"
 };
-
-// src/font-size.ts
 var fontSizes = {
   sm: "0.812rem",
   md: "1rem",
   lg: "1.25rem",
   xl: "1.562rem"
 };
-
-// src/radii.ts
 var radii = {
   px: "1px",
   xs: "4px",
@@ -82,13 +76,39 @@ var radii = {
   lg: "16px",
   full: "99999px"
 };
+
+// src/styles/index.ts
+var import_react2 = require("@stitches/react");
+var {
+  styled: styled2,
+  css,
+  globalCss,
+  keyframes,
+  getCssText,
+  theme,
+  createTheme,
+  config
+} = (0, import_react2.createStitches)({
+  themeMap: {
+    ...import_react2.defaultThemeMap,
+    height: "space",
+    width: "space"
+  },
+  theme: {
+    colors,
+    fontSizes,
+    fontWeights,
+    fonts,
+    lineHeights,
+    radii,
+    space
+  }
+});
+
+// src/components/Input.tsx
+var Input = styled2("input", {});
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  colors,
-  fontSizes,
-  fontWeights,
-  fonts,
-  lineHeights,
-  radii,
-  space
+  Input,
+  Select1
 });

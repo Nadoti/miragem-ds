@@ -1,4 +1,4 @@
-export const fontSize = {
+export const fontSizes = {
   sm: '0.812rem',
   md: '1rem',
   lg: '1.25rem',

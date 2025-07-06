@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    // Define a base para as outras opções. 'ESNext' é a mais moderna.
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // A opção mais importante para resolver seu problema!
+    // 'bundler' é a configuração moderna que imita como Vite, tsup, etc.,
+    // resolvem os módulos. Ela entende importações de pastas com 'index.ts'.
+    "moduleResolution": "bundler",
+
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true, // 'tsup' vai cuidar da emissão dos arquivos, não o tsc.
+    "jsx": "react-jsx" // Habilita o JSX moderno do React.
+  },
+  // Diz ao TypeScript para incluir todos os arquivos dentro da pasta 'src'.
+  "include": ["src"],
+  // Exclui pastas que não precisam ser verificadas.
+  "exclude": ["node_modules", "dist"]
+}
