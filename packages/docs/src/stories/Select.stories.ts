@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {Select1, type SelectProps} from "@miragem/react"
+import {Select as SelectComponent, type SelectProps} from "@miragem/react"
 
 
 
 export default {
   title: "Form",
-  component: Select1,
+  component: SelectComponent,
   args: {
     children: "OLAOLA"
   }

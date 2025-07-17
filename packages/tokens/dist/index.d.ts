@@ -3,7 +3,9 @@ declare const colors: {
     white: string;
     gray100: string;
     gray700: string;
+    gray800: string;
     green100: string;
+    green200: string;
     green500: string;
     blue600: string;
     red500: string;
@@ -13,6 +15,7 @@ declare const space: {
     2: string;
     4: string;
     6: string;
+    8: string;
 };
 
 declare const lineHeights: {

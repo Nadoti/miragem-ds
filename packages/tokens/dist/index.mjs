@@ -4,7 +4,9 @@ var colors = {
   white: "#FFFFFF",
   gray100: "#DEE9EA",
   gray700: "#8B8B8B",
+  gray800: "#444444",
   green100: "#F8F8F8",
+  green200: "#E4EDE3",
   green500: "#47A138",
   blue600: "#004D61",
   red500: "#FF5031"
@@ -14,7 +16,8 @@ var colors = {
 var space = {
   2: "0.5rem",
   4: "1rem",
-  6: "1.5rem"
+  6: "1.5rem",
+  8: "2rem"
 };
 
 // src/line-heights.ts
