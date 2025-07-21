@@ -2,93 +2,184 @@ import { styled } from "@stitches/react";
 import React, { ComponentProps } from "react";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
-
-const Container = styled('div', {
-  width: '100%',
-  position: 'relative',
-  border: '1px solid $green500',
-  borderRadius: '$md',
-})
-
-const SelectTitleContainer = styled('div', {
-  width: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '$4',
-  
-  borderRadius: '$md',
-  cursor: 'pointer',
+const Container = styled("div", {
+  width: "max-content",
+  position: "relative",
+  border: "1px solid $green500",
+  borderRadius: "$md",
 
   variants: {
-    isOpen: {
+    fullWidth: {
       true: {
-        borderBottom: '1px solid $green500',
-      },
-      false: {
-        borderBottom: 'none',
+        width: "100%"
       }
     }
   }
 })
 
-const Label = styled('label', {
-
-  pointerEvents: 'none', 
-})
-
-const SelectContent = styled('div', {
-  width: '100%',
+const SelectTitleContainer = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "$4",
+  borderRadius: "$md",
+  cursor: "pointer",
 
   variants: {
     isOpen: {
       true: {
-        display: 'block'
+        borderBottom: "1px solid $green500",
       },
       false: {
-        display: 'none'
+        borderBottom: "none",
+      }
+    },
+
+    
+  }
+})
+
+const Label = styled("label", {
+  pointerEvents: "none", 
+})
+
+const SelectContent = styled("div", {
+
+  variants: {
+    isOpen: {
+      true: {
+        display: "block"
+      },
+      false: {
+        display: "none"
       }
     }
   }
 })
 
-const ListOptions = styled('ul', {
-  textAlign: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '$4 0',
+const ListOptions = styled("ul", {
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  padding: "$4 0",
 })
 
-const Options = styled('li', {
-  listStyle: 'none',
-  padding: '$4 0',
-  cursor: 'pointer',
+const Options = styled("li", {
+  listStyle: "none",
+  padding: "$4 $2",
+  cursor: "pointer",
 
-  '&:hover': {
-    color: '$gray800',
-    background: '$green200',
-    fontWeight: '$bold'
+  "&:hover": {
+    color: "$gray800",
+    background: "$green200",
+    fontWeight: "$bold"
   },
 })
 
+export interface SelectIOption {
+  label: string;
+  value: string;
+};
 
-export function Select() {
+export interface SelectIProps {
+  label: string;
+  options: SelectIOption[];
+  value?: string| null
+  onChange: (value: string) => void;
+  placeholder: string;
+  fullWidth: boolean;
+}
+
+export function Select({ 
+  label,
+  options, 
+  value, 
+  onChange, 
+  placeholder = "Selecione...", 
+  fullWidth 
+}: SelectIProps) {
   const [openSelect, setOpenSelect] = React.useState(false)
-  const listOptions = [
-    'Câmbio de Moeda',
-    'DOC/TED',
-    'Empréstimo e Financiamento'
-  ]
+  const [highlightedIndex, setHighlightedIndex] = React.useState(0);
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const triggerRef = React.useRef<HTMLDivElement>(null)
+  const labelId = React.useId();
+  const listboxId = React.useId();
 
-  function openCloseSelect() {
+  React.useEffect(() => {
+    function handler(event: MouseEvent) {
+      if(containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpenSelect(false);
+      }
+    }
+    window.addEventListener("mousedown", handler)
 
-    setOpenSelect(!openSelect)
+    return () => window.removeEventListener("mousedown", handler)
+  }, [])
+
+  function selectOptions(option: SelectIOption) {
+    if(option.value !== value) {
+      onChange(option.value)
+    }
+    setOpenSelect(false)
+    triggerRef.current?.focus()
   }
 
+  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+    switch(event.key) {
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        if(openSelect) {
+          selectOptions(options[highlightedIndex]);
+        } else {
+          setOpenSelect(true)
+        }
+        break;
+      case "ArrowUp":
+      case "ArrowDown": {
+        event.preventDefault();
+        if(!openSelect) {
+          setOpenSelect(true);
+          return;
+        }
+        const index = highlightedIndex + (event.key === "ArrowDown" ? 1 : -1);
+        if(index >= 0 && index < options.length) {
+          setHighlightedIndex(index);
+        }
+        break;
+      }
+
+      case "Escape":
+        event.preventDefault();
+        setOpenSelect(false);
+        triggerRef.current?.focus();
+        break;
+      
+      case "Tab":
+        setOpenSelect(false);
+        break;
+    }
+  }
+
+  const selectedOption = options.find((o) => o.value === value);
+
   return (
-    <Container>
-      <SelectTitleContainer onClick={openCloseSelect} isOpen={openSelect}>
-        <Label htmlFor="">Selecione o tipo de transação</Label>
+    <Container
+      ref={containerRef}
+      onKeyDown={handleKeyDown}
+      fullWidth={fullWidth}
+    >
+      <SelectTitleContainer 
+        onClick={() => setOpenSelect(!openSelect)} 
+        isOpen={openSelect} 
+        ref={triggerRef}
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded={openSelect}
+        aria-controls={listboxId}
+        aria-labelledby={labelId}
+      >
+        <Label id={labelId}>{selectedOption ? selectedOption.label : placeholder}</Label>
         {openSelect ? 
           <span>
             <TiArrowSortedUp size={28} color="#47A138"/>
@@ -100,11 +191,24 @@ export function Select() {
         }
       </SelectTitleContainer>
 
-      <SelectContent isOpen={openSelect}>
+      <SelectContent isOpen={openSelect}
+        id={listboxId}
+        role="listbox"
+        aria-labelledby={labelId}
+        aria-activedescendant={`option-${value}-${highlightedIndex}`}
+      >
         <ListOptions>
-          {listOptions.map((options) => (
-            <Options key={options}>
-              {options}
+          {options.map((option, index) => (
+            <Options 
+              key={option.value}
+              id={`option-${value}-${index}`}
+              role="option"
+              aria-selected={value === option.value}
+              data-highlihted={highlightedIndex === index}
+              onMouseEnter={() => setHighlightedIndex(index)}
+              onClick={() => selectOptions(option)}
+            >
+              {option.label}
             </Options>
           ))}
         </ListOptions>
