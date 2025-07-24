@@ -77,6 +77,6 @@ export interface InputProps extends InputVariants, Omit<NativeInputProps, 'disab
 
 export function Input({ disabled, ...props }: InputProps) {
   return (
-      <InputStyled disabled={disabled} {...props} />
+    <InputStyled disabled={disabled} {...props} />
   )
 }
