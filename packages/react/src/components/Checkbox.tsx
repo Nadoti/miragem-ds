@@ -1,18 +1,21 @@
-import { ComponentProps } from "react"
-import { styled } from "../styles"
+import { ComponentProps } from "react";
+import { styled } from "../styles";
 
+// Defina os tipos explicitamente para cada componente estilizado
+type CheckboxContentStyledComponent = ReturnType<typeof styled>;
+type CheckboxStyleStyledComponent = ReturnType<typeof styled>;
+type LabelStyledComponent = ReturnType<typeof styled>;
 
-const CheckboxContent = styled('span', {
+const CheckboxContent: CheckboxContentStyledComponent = styled('span', {
   display: 'inline-block',
   width: '25px',
   height: '25px',
-  backgroundColor: '$loContrast', 
+  backgroundColor: '$loContrast',
   borderRadius: '$sm',
   position: 'relative',
   transition: 'all 0.2s',
   marginRight: "$2",
   border: '2px solid $green500',
-
   '&::after': {
     content: '',
     position: 'absolute',
@@ -27,14 +30,14 @@ const CheckboxContent = styled('span', {
   },
 });
 
-const CheckboxStyle = styled('input', {
-   position: 'absolute',
-   opacity: 0,
-   width: 0,
-   height: 0,
-})
+const CheckboxStyle: CheckboxStyleStyledComponent = styled('input', {
+  position: 'absolute',
+  opacity: 0,
+  width: 0,
+  height: 0,
+});
 
-const Label = styled('label', {
+const Label: LabelStyledComponent = styled('label', {
   width: "max-content",
   display: 'flex',
   alignItems: 'center',
@@ -43,26 +46,21 @@ const Label = styled('label', {
   userSelect: 'none',
   fontSize: '$md',
   color: '$hiContrast',
-
   [`& ${CheckboxStyle}:checked + ${CheckboxContent}`]: {
     backgroundColor: '$green500',
     borderColor: '$green500',
   },
-
   [`& ${CheckboxStyle}:checked + ${CheckboxContent}::after`]: {
     display: 'block',
   },
-
   [`& ${CheckboxStyle}:focus-visible + ${CheckboxContent}`]: {
     outline: '2px solid $blue500',
     outlineOffset: '2px',
   },
-  
   [`& ${CheckboxStyle}:disabled + ${CheckboxContent}`]: {
     borderColor: '$gray300',
     backgroundColor: '$gray100',
   },
-
   [`& ${CheckboxStyle}:disabled ~ span`]: {
     color: '$gray500',
     cursor: 'not-allowed',
@@ -73,16 +71,14 @@ type ICheckboxProps = ComponentProps<'input'> & {
   label: string;
 };
 
-export function Checkbox({ label, ...props}: ICheckboxProps) {
-
+export function Checkbox({ label, ...props }: ICheckboxProps) {
   return (
     <Label>
-      <CheckboxStyle type="checkbox" {...props}/>
+      <CheckboxStyle type="checkbox" {...props} />
       <CheckboxContent />
-      { label }
+      {label}
     </Label>
-  )
+  );
 }
 
-
-export type CheckboxProps = ComponentProps<typeof Checkbox>
+export type CheckboxProps = ComponentProps<typeof Checkbox>;

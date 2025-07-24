@@ -1,8 +1,17 @@
-import { styled } from "@stitches/react";
+import { styled } from "../styles"; // Use o styled do seu sistema, não do @stitches/react
 import React, { ComponentProps } from "react";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import type { VariantProps } from '@stitches/react';
 
-const Container = styled("div", {
+// Defina os tipos explicitamente para cada componente estilizado
+type ContainerStyledComponent = ReturnType<typeof styled>;
+type SelectTitleContainerStyledComponent = ReturnType<typeof styled>;
+type LabelStyledComponent = ReturnType<typeof styled>;
+type SelectContentStyledComponent = ReturnType<typeof styled>;
+type ListOptionsStyledComponent = ReturnType<typeof styled>;
+type OptionsStyledComponent = ReturnType<typeof styled>;
+
+const Container: ContainerStyledComponent = styled("div", {
   width: "max-content",
   position: "relative",
   border: "1px solid $green500",
@@ -15,9 +24,9 @@ const Container = styled("div", {
       }
     }
   }
-})
+});
 
-const SelectTitleContainer = styled("div", {
+const SelectTitleContainer: SelectTitleContainerStyledComponent = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -33,18 +42,15 @@ const SelectTitleContainer = styled("div", {
       false: {
         borderBottom: "none",
       }
-    },
-
-    
+    }
   }
-})
+});
 
-const Label = styled("label", {
+const Label: LabelStyledComponent = styled("label", {
   pointerEvents: "none", 
-})
+});
 
-const SelectContent = styled("div", {
-
+const SelectContent: SelectContentStyledComponent = styled("div", {
   variants: {
     isOpen: {
       true: {
@@ -55,16 +61,16 @@ const SelectContent = styled("div", {
       }
     }
   }
-})
+});
 
-const ListOptions = styled("ul", {
+const ListOptions: ListOptionsStyledComponent = styled("ul", {
   textAlign: "center",
   display: "flex",
   flexDirection: "column",
   padding: "$4 0",
-})
+});
 
-const Options = styled("li", {
+const Options: OptionsStyledComponent = styled("li", {
   listStyle: "none",
   padding: "$4 $2",
   cursor: "pointer",
@@ -74,17 +80,17 @@ const Options = styled("li", {
     background: "$green200",
     fontWeight: "$bold"
   },
-})
+});
 
 export interface SelectIOption {
   label: string;
   value: string;
-};
+}
 
 export interface SelectIProps {
   label: string;
   options: SelectIOption[];
-  value?: string| null
+  value?: string | null;
   onChange: (value: string) => void;
   placeholder: string;
   fullWidth: boolean;
@@ -98,10 +104,10 @@ export function Select({
   placeholder = "Selecione...", 
   fullWidth 
 }: SelectIProps) {
-  const [openSelect, setOpenSelect] = React.useState(false)
+  const [openSelect, setOpenSelect] = React.useState(false);
   const [highlightedIndex, setHighlightedIndex] = React.useState(0);
-  const containerRef = React.useRef<HTMLDivElement>(null)
-  const triggerRef = React.useRef<HTMLDivElement>(null)
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const triggerRef = React.useRef<HTMLDivElement>(null);
   const labelId = React.useId();
   const listboxId = React.useId();
 
@@ -111,17 +117,17 @@ export function Select({
         setOpenSelect(false);
       }
     }
-    window.addEventListener("mousedown", handler)
+    window.addEventListener("mousedown", handler);
 
-    return () => window.removeEventListener("mousedown", handler)
-  }, [])
+    return () => window.removeEventListener("mousedown", handler);
+  }, []);
 
   function selectOptions(option: SelectIOption) {
     if(option.value !== value) {
-      onChange(option.value)
+      onChange(option.value);
     }
-    setOpenSelect(false)
-    triggerRef.current?.focus()
+    setOpenSelect(false);
+    triggerRef.current?.focus();
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
@@ -132,7 +138,7 @@ export function Select({
         if(openSelect) {
           selectOptions(options[highlightedIndex]);
         } else {
-          setOpenSelect(true)
+          setOpenSelect(true);
         }
         break;
       case "ArrowUp":
@@ -214,7 +220,7 @@ export function Select({
         </ListOptions>
       </SelectContent>
     </Container>
-  )
+  );
 }
 
-export type SelectProps = ComponentProps<typeof Select>
+export type SelectProps = ComponentProps<typeof Select>;
