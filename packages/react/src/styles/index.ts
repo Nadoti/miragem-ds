@@ -2,8 +2,16 @@ import { colors, fontSizes, fontWeights, fonts, lineHeights, space, radii} from 
 import { createStitches, defaultThemeMap } from '@stitches/react'
 import type * as Stitches from '@stitches/react'
 
-// Crie a configuração do Stitches
-const stitches = createStitches({
+export const {
+  styled,
+  css,
+  globalCss,
+  keyframes,
+  getCssText,
+  theme,
+  createTheme,
+  config,
+} = createStitches({
   themeMap: {
     ...defaultThemeMap,
     height: 'space',
@@ -20,17 +28,8 @@ const stitches = createStitches({
   },
 })
 
-// Exporte com tipos explícitos
-export const styled: typeof stitches.styled = stitches.styled
-export const css: typeof stitches.css = stitches.css
-export const globalCss: typeof stitches.globalCss = stitches.globalCss
-export const keyframes: typeof stitches.keyframes = stitches.keyframes
-export const getCssText: typeof stitches.getCssText = stitches.getCssText
-export const theme: typeof stitches.theme = stitches.theme
-export const createTheme: typeof stitches.createTheme = stitches.createTheme
-export const config: typeof stitches.config = stitches.config
-
-// Tipos auxiliares
+// Adicione essas declarações de tipo explícitas
+export type StyledComponent = typeof styled
 export type CSS = Stitches.CSS<typeof config>
 export type { VariantProps } from '@stitches/react'
 
