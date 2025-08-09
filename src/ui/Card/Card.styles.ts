@@ -33,6 +33,15 @@ export const cardContainer = cva({
   }
 })
 
+export const cardContent = cva({
+  base: {
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    zIndex: '2'
+  }
+})
+
 export const cardImgContainer = cva({
   base: {
     position: "absolute",

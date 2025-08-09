@@ -2,6 +2,7 @@ import { PixelTop } from "../../component/PixelsTop";
 import { PixelBottom } from "../../component/PixelsBottom";
 import {
   cardContainer,
+  cardContent,
   cardImgContainer,
   cardPixelsBottomContainer,
   cardPixelsTopContainer,
@@ -27,7 +28,7 @@ export function Card({
 }: ICardProps) {
   return (
     <div className={`${cardContainer({ background, heightAuto })} ${className || ''}`} {...rest}>
-      <div style={{ position: "relative", zIndex: 2 }}>
+      <div className={cardContent()}>
         {children}
       </div>
       
