@@ -4,7 +4,6 @@ import { colors } from "../tokens";
 export function PixelTop({ background, ...props }: IPixelsProps) {
   const isBackground = background === "primary";
   const backgroundColor = isBackground ? colors.gray400 : colors.gray100;
-  console.log('XXXXXX', backgroundColor);
  
   return (
     <>
