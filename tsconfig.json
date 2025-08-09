@@ -1,0 +1,40 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@ui": ["./src/ui/index.tsx"]
+    },
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "es6"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "declarationDir": "dist"
+  },
+  "include": [
+    "src",
+    "styled-system"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.stories.*",
+    "**/*.test.*"
+  ]
+}

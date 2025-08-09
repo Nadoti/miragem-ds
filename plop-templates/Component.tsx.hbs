@@ -1,0 +1,11 @@
+import type { ReactNode, HTMLAttributes } from "react";
+
+interface Props extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+}
+
+export default function {{pascalCase name}}(props: Props) {
+  return (
+    <div {...props} />
+  );
+}
