@@ -3,8 +3,11 @@ import { cva } from "../../../styled-system/css"
 export const cardContainer = cva({
   base: {
     width: "100%",
-    // padding: "6",
-    background: "red",
+    paddingLeft: "6",
+    paddingRight: "6",
+    paddingTop: "6",
+    paddingBottom: "6",
+    background: "gray50",
     borderRadius: "8px",
     position: "relative",
     overflow: "hidden" 
