@@ -1,7 +1,8 @@
-import type { HTMLAttributes } from "react";
+import type { InputHTMLAttributes } from "react";
 
-export interface InputProps extends HTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  variant?: "default" | "line" | undefined;
+  variant: "default" | "line";
   disabled?: boolean;
+  type: "text" | "number"
 }

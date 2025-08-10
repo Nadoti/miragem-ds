@@ -5,11 +5,14 @@ export const containerStyles = css({
   width: "100%",
   display: "flex",
   flexDirection: "column",
-  boxSizing: "border-box"
+  boxSizing: "border-box",
+  gap: "4"
 })
 
 export const labelStyles = css({
- 
+  fontSize: "md",
+  color: "gray100",
+  fontWeight: "semiBold"
 })
 
 export const inputStyles = cva({
@@ -21,7 +24,7 @@ export const inputStyles = cva({
     fontFamily: 'default',
     paddingX: '4',
     color: 'gray800',
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     transition: 'border-color 0.2s, box-shadow 0.2s',
     
     '&:focus': {
@@ -30,7 +33,7 @@ export const inputStyles = cva({
     },
     
     '&::placeholder': {
-      color: 'gray100',
+      color: 'gray800',
     },
   },
   
@@ -65,6 +68,15 @@ export const inputStyles = cva({
         '&::placeholder': {
           color: 'gray400',
         }
+      },
+    },
+
+    type: {
+      number: {
+        textAlign: "center",
+      },
+      text: {
+
       },
     }
   },

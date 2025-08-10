@@ -15,9 +15,12 @@ type Story = StoryObj<InputProps>;
 
 export const Default: Story = {
   args: {
-    variant: "default"
+    variant: "default",
+    type: "number",
+    placeholder: "00.00"
   }
 };
+
 
 export const Line: Story = {
   args: {

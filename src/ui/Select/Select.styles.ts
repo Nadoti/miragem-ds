@@ -5,6 +5,7 @@ export const containerStyles = css({
   position: "relative",
   border: "1px solid token(colors.green500)",
   borderRadius: "md",
+  background: "white",
 });
 
 export const selectTitleContainerStyles = css({
@@ -46,6 +47,7 @@ export const listOptionsStyles = css({
   flexDirection: "column",
   paddingY: "4",
   paddingX: "0",
+  // background: "red",
 });
 
 export const optionsStyles = css({
